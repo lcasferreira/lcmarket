@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -30,13 +31,13 @@ public class ShoppingCartItem extends BasicEntity {
 	@JoinColumn(name="product_id", referencedColumnName="id", insertable = false, updatable = false)
 	private Product product;
 	
-	@Getter @Setter
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="shopping_kart_id", referencedColumnName="id", insertable = false, updatable = false)
+	@Setter
 	private ShoppingCart shoppingKart;
 	
 	@Getter @Setter
 	private Integer qty = 0;
+	
+	public ShoppingCartItem() { }
 	
 	public ShoppingCartItem(Product product) {
 		this.product = product;
@@ -49,6 +50,12 @@ public class ShoppingCartItem extends BasicEntity {
 		return id;
 	}
 	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="shopping_kart_id", referencedColumnName="id", insertable = false, updatable = false)
+	public ShoppingCart getShoppingKart() {
+		return shoppingKart;
+	}
+	
 	public void incrementQty(){
 		qty++;
 	}
@@ -56,7 +63,8 @@ public class ShoppingCartItem extends BasicEntity {
 	public void resetQty(){
 		qty = 0;
 	}
-	
+
+	@Transient
 	public BigDecimal getTotalPrice(){
 		if(product != null && product.getPrice() != null){
 			return product.getPrice().multiply(new BigDecimal(qty));

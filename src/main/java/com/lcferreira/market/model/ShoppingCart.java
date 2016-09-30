@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -63,6 +64,7 @@ public class ShoppingCart extends BasicEntity {
 		items.clear();
 	}
 	
+	@Transient
 	public BigDecimal getTotalPrice(){
 		BigDecimal sum = BigDecimal.ZERO;
 		items.forEach(item->{
@@ -75,6 +77,7 @@ public class ShoppingCart extends BasicEntity {
 	 * Return amount of items in shopping kart.
 	 * @return
 	 */
+	@Transient
 	public Integer getQtyItemsInKart(){
 		if(items.isEmpty()){
 			return 0;
