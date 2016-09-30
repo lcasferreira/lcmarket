@@ -1,17 +1,23 @@
 package com.lcferreira.market.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.lcferreira.market.ProductService;
+import com.lcferreira.market.model.Product;
 
 @RestController
 public class ProductController {
 
-	private static final String msg = "Hello, %s!";
+	@Autowired
+	private ProductService productService;
 	
-	@RequestMapping(value = "/hello", method = RequestMethod.GET, produces = "application/json")
-	public String getWellComeMsg(@RequestParam(value = "name", defaultValue="World") String name){
-		return String.format(msg, name);
+	@RequestMapping(value = "/products", method = RequestMethod.GET, produces = "application/json")
+	public List<Product> getAllProducts() {
+		return productService.getAllProducts();
 	}
 }
