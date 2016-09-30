@@ -33,4 +33,12 @@ public class Product extends BasicEntity {
 	public Long getId() {
 		return id;
 	}
+	
+	public Product() { }
+	
+	public Product(String name, BigDecimal price) {
+		this.name = name;
+		this.price = price;
+	}
+	
 }
