@@ -18,7 +18,7 @@ import lombok.Setter;
 @Entity
 @Table(name="shopping_kart_item")
 @SequenceGenerator(name="shoppingKartItemSequence", sequenceName="shopping_kart_item_seq", allocationSize = 1)
-public class ShoppingKartItem extends BasicEntity {
+public class ShoppingCartItem extends BasicEntity {
 	
 	/**
 	 * 
@@ -33,12 +33,12 @@ public class ShoppingKartItem extends BasicEntity {
 	@Getter @Setter
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="shopping_kart_id", referencedColumnName="id", insertable = false, updatable = false)
-	private ShoppingKart shoppingKart;
+	private ShoppingCart shoppingKart;
 	
 	@Getter @Setter
 	private Integer qty = 0;
 	
-	public ShoppingKartItem(Product product) {
+	public ShoppingCartItem(Product product) {
 		this.product = product;
 		this.qty = 1;
 	}

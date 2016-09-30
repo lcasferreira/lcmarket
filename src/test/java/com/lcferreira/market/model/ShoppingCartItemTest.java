@@ -7,10 +7,10 @@ import java.math.BigDecimal;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ShoppingKartItemTest {
+public class ShoppingCartItemTest {
 	
 	Product product;
-	ShoppingKartItem kartItem;
+	ShoppingCartItem cartItem;
 	
 	@Before
 	public void init(){
@@ -18,38 +18,38 @@ public class ShoppingKartItemTest {
 		product.setName("Product Test");
 		product.setPrice(new BigDecimal(50));
 		
-		kartItem = new ShoppingKartItem(product);
+		cartItem = new ShoppingCartItem(product);
 	}
 
 	@Test
 	public void getTotalPriceNullProductTest(){
 		
-		kartItem.setProduct(null);
+		cartItem.setProduct(null);
 
-		assertEquals(BigDecimal.ZERO, kartItem.getTotalPrice());
+		assertEquals(BigDecimal.ZERO, cartItem.getTotalPrice());
 	}
 	
 	@Test
 	public void getTotalPriceNullProductPriceTest(){
 		
-		kartItem.getProduct().setPrice(null);
+		cartItem.getProduct().setPrice(null);
 
-		assertEquals(BigDecimal.ZERO, kartItem.getTotalPrice());
+		assertEquals(BigDecimal.ZERO, cartItem.getTotalPrice());
 	}
 	
 	@Test
 	public void getTotalPriceNoProductsTest(){
 		
-		kartItem.setQty(0);
+		cartItem.setQty(0);
 
-		assertEquals(BigDecimal.ZERO, kartItem.getTotalPrice());
+		assertEquals(BigDecimal.ZERO, cartItem.getTotalPrice());
 	}
 	
 	@Test
 	public void getTotalPriceWithProductsTest(){
 		
-		kartItem.setQty(3);
+		cartItem.setQty(3);
 
-		assertEquals(new BigDecimal(150), kartItem.getTotalPrice());
+		assertEquals(new BigDecimal(150), cartItem.getTotalPrice());
 	}
 }

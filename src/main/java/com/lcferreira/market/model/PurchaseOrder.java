@@ -45,6 +45,6 @@ public class PurchaseOrder extends BasicEntity {
 	
 	@OneToOne(optional = false)
 	@JoinColumn(name="shopping_kart_id", referencedColumnName="id")
-	private ShoppingKart shoppingKart;
+	private ShoppingCart shoppingCart;
 	
 }

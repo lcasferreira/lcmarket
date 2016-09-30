@@ -1,6 +1,6 @@
 package com.lcferreira.market.model;
 
-public enum ShoppingKartStatus {
+public enum ShoppingCartStatus {
 
 	/**
 	 * Indicates a shopping cart not closed, ie, capable of editing

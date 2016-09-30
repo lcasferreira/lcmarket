@@ -20,7 +20,7 @@ import lombok.Setter;
 @Entity
 @Table(name="shopping_kart")
 @SequenceGenerator(name="shoppingKartSequence", sequenceName="shopping_kart_seq", allocationSize = 1)
-public class ShoppingKart extends BasicEntity {
+public class ShoppingCart extends BasicEntity {
 	
 	/**
 	 * 
@@ -28,11 +28,11 @@ public class ShoppingKart extends BasicEntity {
 	private static final long serialVersionUID = -7077501508374084997L;
 	
 	@Setter
-	private List<ShoppingKartItem> items = new ArrayList<ShoppingKartItem>();
+	private List<ShoppingCartItem> items = new ArrayList<ShoppingCartItem>();
 	
 	@Getter @Setter
 	@Enumerated(EnumType.ORDINAL)
-	private ShoppingKartStatus status = ShoppingKartStatus.BUYING;
+	private ShoppingCartStatus status = ShoppingCartStatus.BUYING;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="shoppingKartSequence")
@@ -41,7 +41,7 @@ public class ShoppingKart extends BasicEntity {
 	}
 
 	@OneToMany(mappedBy="shoppingKart", orphanRemoval = true)
-	public List<ShoppingKartItem> getItems() {
+	public List<ShoppingCartItem> getItems() {
 		return items;
 	}
 	
@@ -53,7 +53,7 @@ public class ShoppingKart extends BasicEntity {
 				}
 			});
 		} else {
-			ShoppingKartItem newItem = new ShoppingKartItem(product);
+			ShoppingCartItem newItem = new ShoppingCartItem(product);
 			newItem.setShoppingKart(this);
 			items.add(newItem);
 		}
@@ -63,11 +63,22 @@ public class ShoppingKart extends BasicEntity {
 		items.clear();
 	}
 	
-	public BigDecimal getTotal(){
+	public BigDecimal getTotalPrice(){
 		BigDecimal sum = BigDecimal.ZERO;
 		items.forEach(item->{
-			sum.add(item.getProduct().getPrice().multiply(new BigDecimal(item.getQty())));
+			sum.add(item.getTotalPrice());
 		});
 		return sum;
+	}
+	
+	/**
+	 * Return amount of items in shopping kart.
+	 * @return
+	 */
+	public Integer getQtyItemsInKart(){
+		if(items.isEmpty()){
+			return 0;
+		}
+		return items.stream().mapToInt(ShoppingCartItem::getQty).sum();
 	}
 }
