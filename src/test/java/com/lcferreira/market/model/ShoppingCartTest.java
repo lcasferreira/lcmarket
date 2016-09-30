@@ -1,9 +1,7 @@
 package com.lcferreira.market.model;
 
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 
 import java.math.BigDecimal;
 
@@ -31,12 +29,31 @@ public class ShoppingCartTest {
 	@Test
 	public void addProductTest(){
 
+		assertNotNull(cart);
+		BigDecimal totalPrice = BOOK_PRICE;
+
 		cart.addProduct(book);
 		
-		assertNotNull(cart);
 		assertEquals(1, cart.getQtyItemsInKart().intValue());
 		assertEquals(BOOK_PRICE, cart.getTotalPrice());
 		
+		cart.addProduct(book);
+		
+		totalPrice = totalPrice.multiply(new BigDecimal(2));
+		assertEquals(2, cart.getQtyItemsInKart().intValue());
+		assertEquals(totalPrice, cart.getTotalPrice());
+		
+		cart.addProduct(magazine);
+		
+		totalPrice = totalPrice.add(MAGAZINE_PRICE);
+		assertEquals(3, cart.getQtyItemsInKart().intValue());
+		assertEquals(totalPrice, cart.getTotalPrice());
+		
+		cart.addProduct(kindle);
+		
+		totalPrice = totalPrice.add(KINDLE_PRICE);
+		assertEquals(4, cart.getQtyItemsInKart().intValue());
+		assertEquals(totalPrice, cart.getTotalPrice());
 	}
 
 	private void createProducts(){
@@ -48,5 +65,8 @@ public class ShoppingCartTest {
 		
 		kindle = new Product("Kindle", KINDLE_PRICE);
 		kindle.setId(3L);
+		
+//		ShoppingCartItem bookItem = new ShoppingCartItem(book);
+//		bookItem.setId(1L);
 	}
 }
