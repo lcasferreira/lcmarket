@@ -47,17 +47,17 @@ public class ShoppingCart extends BasicEntity {
 	}
 	
 	public void addProduct(Product product){
-		if(items.contains(product)){
-			items.forEach(item->{
-				if(item.getProduct().equals(product)){
-					item.incrementQty();
-				}
-			});
-		} else {
-			ShoppingCartItem newItem = new ShoppingCartItem(product);
-			newItem.setShoppingKart(this);
-			items.add(newItem);
+
+		for (ShoppingCartItem item : items) {
+			if(item.getProduct().equals(product)){
+				item.incrementQty();
+				return;
+			}
 		}
+		
+		ShoppingCartItem newItem = new ShoppingCartItem(product);
+		newItem.setShoppingKart(this);
+		items.add(newItem);
 	}
 	
 	public void clearItems(){
@@ -67,9 +67,9 @@ public class ShoppingCart extends BasicEntity {
 	@Transient
 	public BigDecimal getTotalPrice(){
 		BigDecimal sum = BigDecimal.ZERO;
-		items.forEach(item->{
-			sum.add(item.getTotalPrice());
-		});
+		for (ShoppingCartItem item : items) {
+			sum = sum.add(item.getTotalPrice());
+		}
 		return sum;
 	}
 	
