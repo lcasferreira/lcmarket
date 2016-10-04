@@ -26,6 +26,9 @@ public class Product extends BasicEntity {
 	private String name;
 	
 	@Getter @Setter
+	private String image;
+	
+	@Getter @Setter
 	private BigDecimal price;
 	
 	@Id

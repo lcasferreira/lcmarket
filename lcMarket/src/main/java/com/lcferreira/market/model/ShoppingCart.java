@@ -82,6 +82,7 @@ public class ShoppingCart extends BasicEntity {
 		if(items.isEmpty()){
 			return 0;
 		}
-		return items.stream().mapToInt(ShoppingCartItem::getQty).sum();
+		Integer qty = items.stream().mapToInt(ShoppingCartItem::getQty).sum();
+		return qty;
 	}
 }
