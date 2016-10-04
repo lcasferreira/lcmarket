@@ -3,19 +3,18 @@
 
   angular
     .module('lcMarketFrontend')
-    .config(routerConfig);
+    .config(routeConfig);
 
-  /** @ngInject */
-  function routerConfig($stateProvider, $urlRouterProvider) {
-    $stateProvider
-      .state('home', {
-        url: '/',
+  function routeConfig($routeProvider) {
+    $routeProvider
+      .when('/', {
         templateUrl: 'app/main/main.html',
         controller: 'MainController',
         controllerAs: 'main'
+      })
+      .otherwise({
+        redirectTo: '/'
       });
-
-    $urlRouterProvider.otherwise('/');
   }
 
 })();
