@@ -3,8 +3,6 @@
   'use strict';
 
   angular
-    .module('lcMarketFrontend')
-    .constant('malarkey', malarkey)
-    .constant('moment', moment);
+    .module('lcMarketFrontend');
 
 })();
