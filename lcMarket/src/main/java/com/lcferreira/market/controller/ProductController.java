@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lcferreira.market.ProductService;
 import com.lcferreira.market.model.Product;
+import com.lcferreira.market.service.ProductService;
 
 @RestController
 public class ProductController {

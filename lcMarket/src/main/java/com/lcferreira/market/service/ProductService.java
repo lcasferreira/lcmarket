@@ -1,4 +1,4 @@
-package com.lcferreira.market;
+package com.lcferreira.market.service;
 
 import java.util.ArrayList;
 import java.util.List;
