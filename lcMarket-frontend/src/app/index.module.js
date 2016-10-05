@@ -2,6 +2,6 @@
   'use strict';
 
   angular
-    .module('lcMarketFrontend', ['ngCookies', 'ngSanitize', 'ngMessages', 'ngResource', 'ngRoute', 'ngMaterial']);
+    .module('lcMarketFrontend', ['ngCookies', 'ngSanitize', 'ngMessages', 'ngResource', 'ngRoute', 'ngMaterial', 'ngMdIcons']);
 
 })();
