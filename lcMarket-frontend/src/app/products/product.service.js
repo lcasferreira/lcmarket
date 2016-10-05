@@ -6,12 +6,12 @@
     .service('ProductService', ProductService);
 
   /** @ngInject */
-  function ProductService($http) {
+  function ProductService($http, $q) {
     
     this.getProducts = function(){
       var deferred = $q.defer();
-      var params = ConfigurationService.getAsUriParam(filter);
-      var url = ConfigurationService.getServiceHost() + '/shopfloor/management/production/scrap' + params;
+      //var params = ConfigurationService.getAsUriParam(filter);
+      var url = 'http://localhost:8680/lcmarket/products';
         $http.get(url)
       .then(function(response){
         deferred.resolve(response.data);
@@ -24,7 +24,7 @@
     }
 
 
-    //ScrapService.$inject = ['$http', '$q', 'ConfigurationService'];
+    //ScrapService.$inject = ['$http', '$q'];
     
   }
 })();

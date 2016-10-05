@@ -19,47 +19,39 @@
     <!-- endinject -->
     <!-- endbuild -->
   </head>
-  <body>
+  <body layout="column" style="overflow-y: hidden;">
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <section layout="row">
+
+    <md-toolbar>
+        <div class="md-toolbar-tools" layout-align="center center">
+            <md-button class="md-fab md-mini" aria-label="Favorite">
+                <ng-md-icon icon="shopping_cart" class="material-icons md-48"></ng-md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <div layout="row" layout-fill>
+
         <md-sidenav class="md-sidenav-left"
             md-component-id="left"
             md-is-locked-open="$mdMedia('gt-md')"
             md-whiteframe="4">
             Teste
         </md-sidenav>
-        <div layout="column">
-            <md-toolbar>
-              <div class="md-toolbar-tools">
-                <md-button aria-label="Go Back">
-                  Go Back
-                </md-button>
-                <h2>
-                  <span>Toolbar with Standard Buttons</span>
-                </h2>
-                <span flex></span>
-                <md-button class="md-raised" aria-label="Learn More">
-                  Learn More
-                </md-button>
-                <md-button class="md-fab md-mini" aria-label="Favorite">
-                  <md-icon md-svg-icon="img/icons/favorite.svg"></md-icon>
-                </md-button>
-              </div>
-            </md-toolbar>
-            
-            <div ng-view></div>
-        </div>
-        
-    </section>
-    
 
+        <div ng-view layout-fill></div>
+    </div>
+    
+    
+    
     <!-- build:js(src) scripts/vendor.js -->
     <!-- bower:js -->
     <!-- run `gulp inject` to automatically populate bower script dependencies -->
     <!-- endbower -->
     <!-- endbuild -->
+    <script src="../bower_components/angular-material-icons/angular-material-icons.min.js"></script>
 
     <!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
     <!-- inject:js -->
