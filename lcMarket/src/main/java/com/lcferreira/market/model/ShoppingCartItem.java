@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlTransient;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -26,9 +27,7 @@ public class ShoppingCartItem extends BasicEntity {
 	 */
 	private static final long serialVersionUID = -5577810003698959030L;
 
-	@Getter @Setter
-	@ManyToOne(fetch = FetchType.EAGER, optional = false)
-	@JoinColumn(name="product_id", referencedColumnName="id", insertable = false, updatable = false)
+	@Setter
 	private Product product;
 	
 	@Setter
@@ -50,10 +49,18 @@ public class ShoppingCartItem extends BasicEntity {
 		return id;
 	}
 	
+	@XmlTransient
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="shopping_kart_id", referencedColumnName="id", insertable = false, updatable = false)
 	public ShoppingCart getShoppingKart() {
 		return shoppingKart;
+	}
+
+	@XmlTransient
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
+	@JoinColumn(name="product_id", referencedColumnName="id")
+	public Product getProduct() {
+		return product;
 	}
 	
 	public void incrementQty(){

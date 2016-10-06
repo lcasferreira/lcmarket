@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -31,8 +32,7 @@ public class ShoppingCart extends BasicEntity {
 	@Setter
 	private List<ShoppingCartItem> items = new ArrayList<ShoppingCartItem>();
 	
-	@Getter @Setter
-	@Enumerated(EnumType.ORDINAL)
+	@Setter
 	private ShoppingCartStatus status = ShoppingCartStatus.BUYING;
 	
 	@Id
@@ -41,9 +41,14 @@ public class ShoppingCart extends BasicEntity {
 		return this.id;
 	}
 
-	@OneToMany(mappedBy="shoppingKart", orphanRemoval = true)
+	@OneToMany(mappedBy="shoppingKart", orphanRemoval = true, cascade = CascadeType.ALL)
 	public List<ShoppingCartItem> getItems() {
 		return items;
+	}
+	
+	@Enumerated(EnumType.ORDINAL)
+	public ShoppingCartStatus getStatus() {
+		return status;
 	}
 	
 	public void addProduct(Product product){
