@@ -27,7 +27,6 @@
             vm.showSuccessMsg();
           });  
         }
-        
     };
 
     ProductService.getProducts().then(function(response) {
@@ -40,14 +39,13 @@
         $rootScope.idCurrentCart = vm.currentCart.id;
       });  
     };
-    
 
     vm.showSuccessMsg = function(){
       $mdToast.show(
         $mdToast.simple()
           .textContent('Produto adicionado ao carrinho')
           .position('top right')
-          .hideDelay(3000)
+          .hideDelay(2000)
       );
     };
     
