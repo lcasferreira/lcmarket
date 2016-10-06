@@ -1,0 +1,50 @@
+<md-content layout="column" role="main">
+	<ui-view layout="column" layout-fill layout-padding>
+		
+
+	<div ng-show="ctrl.shoppingCart.items">
+		<md-card flex-gt-sm="90" flex-gt-md="80">
+			<md-card-content class="md-card-content-custom-scroll">					
+				<table layout-fill>
+					<thead>
+						<tr layout="row">
+							<td layout="column" flex layout-margin="10">NOME</td>
+							<td layout="column" flex="20" layout-margin="10">PRE&Ccedil;O</td>
+							<td layout="column" flex="20" layout-margin="10">QUANTIDADE</td>
+							<td layout="column" flex="20" layout-margin="10">TOTAL</td>
+							<td layout="column" flex="10"></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="item in ctrl.shoppingCart.items" layout="row">
+							<td layout="column" layout-align="center start" flex layout-margin="10" layout-padding="10" class="td-ellipsis">{{item.product.name}}</td>
+							<td layout="column" layout-align="center start" flex="20" layout-margin="10" layout-padding="10" class="td-ellipsis">{{item.product.price | currency:'R$'}}</td>
+							<td layout="column" layout-align="center start" flex="20" layout-margin="10" layout-padding="10" class="td-ellipsis">{{item.qty}}</td>
+							<td layout="column" layout-align="center start" flex="20" layout-margin="10" layout-padding="10" class="td-ellipsis">{{item.totalPrice | currency:'R$'}}</td>
+							<td layout="column" layout-align="center center" flex="10" class="td-no-format">
+								<div layout="row">
+									<md-button class="md-icon-button" aria-label="Add" layout-fill ng-click="ctrl.removeProduct(item.product.id)">
+        								<ng-md-icon icon="remove_shopping_cart" class="material-icons"></ng-md-icon>
+      						  		</md-button>
+	                           	</div>
+							</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr layout="row">
+							<td layout="column" flex layout-margin="10"></td>
+							<td layout="column" flex="20" layout-margin="10"></td>
+							<td layout="column" flex="20" layout-margin="10">TOTAL</td>
+							<td layout="column" flex="20" layout-margin="10">{{ctrl.shoppingCart.totalPrice | currency:'R$'}}</td>
+							<td layout="column" flex="10"></td>
+						</tr>
+					</tfoot>
+				</table>
+			</md-card-content>
+		</md-card>
+	</div>
+	<div ng-show="!ctrl.shoppingCart.items">
+		Não há itens no carrinho de compras
+	</div>
+	</ui-view>
+</md-content>
