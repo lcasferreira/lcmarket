@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.lcferreira.market.model.Product;
 import com.lcferreira.market.model.ShoppingCart;
+import com.lcferreira.market.model.ShoppingCartStatus;
 import com.lcferreira.market.repositories.ProductRepository;
 import com.lcferreira.market.repositories.ShoppingCartRepository;
 
@@ -19,9 +20,15 @@ public class ShoppingCartService {
 	
 	public ShoppingCart createShoppingCart(Long idProduct){
 		
+		
 		Product prodToadd = productRepository.findOne(idProduct);
 		
-		ShoppingCart shoppingCart = new ShoppingCart();
+		//Verifies if there is a shopping cart. 
+		ShoppingCart shoppingCart = shoppingCartRepository.getShoppingCartByStatus(ShoppingCartStatus.BUYING);
+		if(shoppingCart == null){
+			shoppingCart = new ShoppingCart();
+		}
+		
 		
 		shoppingCart.addProduct(prodToadd);
 		
@@ -59,6 +66,13 @@ public class ShoppingCartService {
 		}
 		
 		shoppingCart = shoppingCartRepository.save(shoppingCart);
+		
+		return shoppingCart;
+	}
+
+	public ShoppingCart getCurrentShoppingCart() {
+
+		ShoppingCart shoppingCart = shoppingCartRepository.getShoppingCartByStatus(ShoppingCartStatus.BUYING);
 		
 		return shoppingCart;
 	}

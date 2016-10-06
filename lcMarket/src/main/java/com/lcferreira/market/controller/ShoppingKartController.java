@@ -21,6 +21,12 @@ public class ShoppingKartController {
 		return shopCart;
 	}
 	
+	@RequestMapping(value = "/shoppingKarts/current", method = RequestMethod.GET, produces = "application/json")
+	public ShoppingCart getCurrentShoppingCart(){
+		ShoppingCart shopCart = shoppingCartService.getCurrentShoppingCart();
+		return shopCart;
+	}
+	
 	@RequestMapping(value = "/shoppingKarts/{idShoppingKart}/products/{idProduct}", method = RequestMethod.PUT, produces = "application/json")
 	public ShoppingCart addProduct( @PathVariable(name="idShoppingKart") Long idShoppingKart,
 							@PathVariable(name="idProduct") Long idProduct){
