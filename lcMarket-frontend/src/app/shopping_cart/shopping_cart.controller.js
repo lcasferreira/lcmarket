@@ -11,10 +11,7 @@
     var vm = this;
 
     vm.shoppingCart;
-
     vm.idShoppingCart = $routeParams.id;
-
-    alert(vm.idShoppingCart);
 
     if(vm.idShoppingCart){
       ShoppingCartService.getShoppingCart(vm.idShoppingCart).then(function(response) {
