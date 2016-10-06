@@ -1,4 +1,4 @@
-<md-content flex layout-fill layout="column" role="main">
+<md-content layout="column" role="main">
 	<!--md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="ctrl.add($event)">
 		<ng-md-icon icon="add"></ng-md-icon>
 	</md-button -->
@@ -13,69 +13,27 @@
 			        md-gutter="12px" md-gutter-gt-sm="8px" >
 
 			        <md-grid-tile ng-repeat="prod in ctrl.products" style="background-color: lightblue;">
-			        	<md-card style="background-color: transparent !important;">
-			        		<md-card-header>
-			        			<md-card-avatar>
-			        				<img src="./assets/capas/{{prod.image}}" class="md-user-avatar">
-			        			</md-card-avatar>
-			        			<md-card-header-text>
-			        				<spam class="md-title">{{prod.name}}</spam>
-			        			</md-card-header-text>			        		
-			        		</md-card-header>
-			        		
-			        		<md-card-content>
-			        			{{prod.price}}
-			        		</md-card-content>
-			        	</md-card>
-			        	
-				    	<md-grid-tile-footer layout-align="center center">
-				    		<md-button md-no-ink class="md-primary">
-				       			<ng-md-icon icon="add_shopping_cart" class="material-icons md-48"></ng-md-icon>
-				       		</md-button>
-				     	</md-grid-tile-footer>
+
+			        	<md-card style="background-color: transparent !important;" layout-fill layout-align="center center">
+					        <md-card-title style="width: 100%;">
+					          <md-card-title-text>
+					            <span class="md-title">{{prod.name}}</span>
+					            <span class="md-subhead">{{prod.price | currency:'R$'}}</span>
+					          </md-card-title-text>
+					          <md-card-title-media>
+					            <div class="md-media-sm card-media"><img src="./assets/capas/{{prod.image}}"></div>
+					          </md-card-title-media>
+					        </md-card-title>
+
+			        		<md-card-actions layout="row" layout-align="end center">
+					          <md-button class="md-icon-button" aria-label="Add" layout-fill ng-click="ctrl.addProduct(prod.id)">
+        						<ng-md-icon icon="add_shopping_cart" class="material-icons md-48"></ng-md-icon>
+      						  </md-button>
+					        </md-card-actions>
+					      </md-card>
 				    </md-grid-tile>
 
 				</md-grid-list>
-				
-				<!--div layout="row" flex="60">
-					<form name="defectFilterForm" flex layout-align="space-between center" layout="row">
-						<md-input-container flex>
-							<label>C&#243;digo</label>
-							<input placeholder="Digite aqui e pressione Enter" maxlength="4" name="codeFilter" type="text" ng-model="ctrl.filter.code" ng-enter="ctrl.refresh()" /> 
-						</md-input-container>
-						<md-input-container flex>
-							<label>Descri&#231;&#227;o</label>
-							<input placeholder="Digite aqui e pressione Enter" maxlength="40" name="descriptionFilter" type="text" ng-model="ctrl.filter.description" ng-enter="ctrl.refresh()" /> 
-						</md-input-container>
-					</form>
-				</div -->
-				
-				<div layout="row">
-					<!--table layout-fill>
-						<thead>
-							<tr layout="row">
-								<td layout="column" flex="15" layout-margin="10">C&#211;DIGO</td>
-								<td layout="column" flex="20" layout-margin="10">DESCRI&Ccedil;&Atilde;O</td>
-								<td layout="column" flex="10"></td>
-							</tr>
-						</thead>
-						<tbody>
-							<!--tr ng-repeat="obj in ctrl.defects | orderBy : ['code', 'description']" layout="row">
-								<td layout="column" layout-align="center start" flex="15" layout-margin="10" layout-padding="10" class="td-ellipsis">{{obj.code}}</td>
-								<td layout="column" layout-align="center start" flex="20" layout-margin="10" layout-padding="10" class="td-ellipsis">{{obj.description}}</td>
-								<td layout="column" layout-align="center center" flex="10" class="td-no-format">
-									<div layout="row">
-										<btn-edit ng-if="obj.active == 1" action="ctrl.edit($event, obj)"></btn-edit>
-										<btn-delete ng-if="obj.active == 1" action="ctrl.remove(obj.id)" description="obj.description"></btn-inactivate>
-	                            	</div>
-								</td>
-							</tr>
-						</tbody>
-					</table-->
-					
-				</div>
-				
-				<!--div layout="row" ng-show="!ctrl.defects">Sem dados.</div-->
 				
 			</md-card-content>
 		</md-card>
