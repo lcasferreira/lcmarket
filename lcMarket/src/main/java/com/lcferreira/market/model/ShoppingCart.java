@@ -16,7 +16,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import lombok.Getter;
 import lombok.Setter;
 
 @Entity
@@ -63,6 +62,21 @@ public class ShoppingCart extends BasicEntity {
 		ShoppingCartItem newItem = new ShoppingCartItem(product);
 		newItem.setShoppingKart(this);
 		items.add(newItem);
+	}
+	
+	public void removeProduct(Long idProduct){
+		List<ShoppingCartItem> copyOfList = new ArrayList<ShoppingCartItem>(items);
+		items.clear();
+		for (ShoppingCartItem item : copyOfList) {
+			if(item.getProduct().getId().equals(idProduct)){
+				if(item.getQty() > 1){
+					item.decrementQty();
+				} else {
+					continue;
+				}
+			}
+			items.add(item);
+		}
 	}
 	
 	public void clearItems(){

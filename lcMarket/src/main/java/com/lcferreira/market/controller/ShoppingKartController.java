@@ -15,10 +15,24 @@ public class ShoppingKartController {
 	@Autowired
 	private ShoppingCartService shoppingCartService;
 
+	@RequestMapping(value = "/shoppingKarts/{idShoppingKart}", method = RequestMethod.GET, produces = "application/json")
+	public ShoppingCart getShoppingCart( @PathVariable(name="idShoppingKart") Long idShoppingKart){
+		ShoppingCart shopCart = shoppingCartService.getShoppingCart(idShoppingKart);
+		return shopCart;
+	}
+	
 	@RequestMapping(value = "/shoppingKarts/{idShoppingKart}/products/{idProduct}", method = RequestMethod.PUT, produces = "application/json")
-	public String addProduct( @PathVariable(name="idShoppingKart") Long idShoppingKart,
+	public ShoppingCart addProduct( @PathVariable(name="idShoppingKart") Long idShoppingKart,
 							@PathVariable(name="idProduct") Long idProduct){
-		return "Product " + idProduct + " added to Kart " + idShoppingKart + "!";
+		ShoppingCart shopCart = shoppingCartService.addProductToCart(idProduct, idShoppingKart);
+		return shopCart;
+	}
+	
+	@RequestMapping(value = "/shoppingKarts/{idShoppingKart}/products/{idProduct}", method = RequestMethod.DELETE, produces = "application/json")
+	public ShoppingCart removeProduct( @PathVariable(name="idShoppingKart") Long idShoppingKart,
+							@PathVariable(name="idProduct") Long idProduct){
+		ShoppingCart shopCart = shoppingCartService.removeProductToCart(idProduct, idShoppingKart);
+		return shopCart;
 	}
 	
 	@RequestMapping(value = "/shoppingKarts/products/{idProduct}", method = RequestMethod.POST, produces = "application/json")

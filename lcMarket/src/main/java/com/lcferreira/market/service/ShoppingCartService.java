@@ -17,13 +17,46 @@ public class ShoppingCartService {
 	@Autowired
 	private ProductRepository productRepository;
 	
-	public ShoppingCart createShoppingCart(Long productId){
+	public ShoppingCart createShoppingCart(Long idProduct){
 		
-		Product prodToadd = productRepository.findOne(productId);
+		Product prodToadd = productRepository.findOne(idProduct);
 		
 		ShoppingCart shoppingCart = new ShoppingCart();
 		
 		shoppingCart.addProduct(prodToadd);
+		
+		shoppingCart = shoppingCartRepository.save(shoppingCart);
+		
+		return shoppingCart;
+	}
+
+	public ShoppingCart addProductToCart(Long idProduct, Long idShoppingKart) {
+		
+		Product prodToadd = productRepository.findOne(idProduct);
+		
+		ShoppingCart shoppingCart = shoppingCartRepository.findOne(idShoppingKart);
+		
+		shoppingCart.addProduct(prodToadd);
+		
+		shoppingCart = shoppingCartRepository.save(shoppingCart);
+		
+		return shoppingCart;
+	}
+
+	public ShoppingCart getShoppingCart(Long idShoppingKart) {
+		return shoppingCartRepository.findOne(idShoppingKart);
+	}
+
+	public ShoppingCart removeProductToCart(Long idProduct, Long idShoppingKart) {
+		
+		ShoppingCart shoppingCart = shoppingCartRepository.findOne(idShoppingKart);
+		
+		shoppingCart.removeProduct(idProduct);
+		
+		if(shoppingCart.getQtyItemsInKart().equals(0)){
+			shoppingCartRepository.delete(shoppingCart.getId());
+			return null;
+		}
 		
 		shoppingCart = shoppingCartRepository.save(shoppingCart);
 		

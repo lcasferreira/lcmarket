@@ -12,7 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.xml.bind.annotation.XmlTransient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -31,6 +32,7 @@ public class ShoppingCartItem extends BasicEntity {
 	private Product product;
 	
 	@Setter
+	@JsonIgnore
 	private ShoppingCart shoppingKart;
 	
 	@Getter @Setter
@@ -49,14 +51,12 @@ public class ShoppingCartItem extends BasicEntity {
 		return id;
 	}
 	
-	@XmlTransient
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="shopping_kart_id", referencedColumnName="id", insertable = false, updatable = false)
+	@JoinColumn(name="shopping_kart_id", referencedColumnName="id")
 	public ShoppingCart getShoppingKart() {
 		return shoppingKart;
 	}
 
-	@XmlTransient
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name="product_id", referencedColumnName="id")
 	public Product getProduct() {
@@ -65,6 +65,10 @@ public class ShoppingCartItem extends BasicEntity {
 	
 	public void incrementQty(){
 		qty++;
+	}
+	
+	public void decrementQty(){
+		qty--;
 	}
 	
 	public void resetQty(){
