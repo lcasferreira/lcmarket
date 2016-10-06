@@ -12,9 +12,16 @@
         controller: 'ProductController',
         controllerAs: 'ctrl'
       })
+      .when('/shopping_cart/:id', {
+        templateUrl: 'app/shopping_cart/shopping_cart.html',
+        controller: 'ShoppingCartController',
+        controllerAs: 'ctrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
+
+
   }
 
 })();
