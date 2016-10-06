@@ -6,17 +6,23 @@
     .controller('ProductController', ProductController);
 
   /** @ngInject */
-  function ProductController(ProductService, ShoppingCartService) {
+  function ProductController($rootScope, ProductService, ShoppingCartService) {
 
     var vm = this;
-
-    vm.currentCart;
     vm.products;
 
     vm.addProduct = function(idProduct){
-        ShoppingCartService.addProduct(idProduct).then(function(response){
-          vm.currentCart = angular.copy(response);
-        });
+        if($rootScope.currentCart){
+          ShoppingCartService.addProductToCart(idProduct, $rootScope.currentCart.id).then(function(response){
+            $rootScope.currentCart = angular.copy(response);
+          });
+
+        } else {
+          ShoppingCartService.addProduct(idProduct).then(function(response){
+            $rootScope.currentCart = angular.copy(response);
+          });  
+        }
+        
     };
 
     ProductService.getProducts().then(function(response) {
