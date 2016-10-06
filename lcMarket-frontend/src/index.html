@@ -19,21 +19,24 @@
     <!-- endinject -->
     <!-- endbuild -->
   </head>
-  <body layout="column" ng-controller="IndexController as indexCtrl">
+  <body layout="column" ng-controller="IndexController as indexCtrl" style="overflow-y: hidden;">
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <md-toolbar>
-        <div class="md-toolbar-tools" layout-align="end center">
-            <!--
-            <md-button class="md-fab md-mini" aria-label="Favorite" ng-click="indexCtrl.goShoppingCart">
-                <ng-md-icon icon="shopping_cart" class="material-icons md-48"></ng-md-icon>
+    <md-toolbar layout="row">
+        <div class="md-toolbar-tools" layout-align="center center" flex="10">
+            <h1>LC Market</h1>
+        </div>
+        <div class="md-toolbar-tools" layout-align="end center" flex>
+            
+            <md-button class="md-fab md-mini" style="padding-top: 8px;">
+                <a ng-href="#/shopping_cart/{{idCurrentCart}}">
+                    <ng-md-icon icon="shopping_cart" class="material-icons md-48"></ng-md-icon>
+                </a>    
             </md-button>
-            -->
-            <a ng-href="#/shopping_cart/{{idCurrentCart}}">
-                <ng-md-icon icon="shopping_cart" class="material-icons md-48"></ng-md-icon>
-            </a>
+            
+            
         </div>
     </md-toolbar>
 
@@ -42,7 +45,8 @@
         <md-sidenav class="md-sidenav-left"
             md-component-id="left"
             md-is-locked-open="$mdMedia('gt-md')"
-            md-whiteframe="4" layout-padding>
+            md-whiteframe="4" layout-padding
+            layout-align="center center">
             Espa&ccedil;o para Menu
         </md-sidenav>
 
