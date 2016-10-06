@@ -63,9 +63,19 @@
       });
       return deferred.promise;
     }
-  
 
-    //ScrapService.$inject = ['$http', '$q'];
-    
+     this.getCurrentShoppingCart = function(){
+      var deferred = $q.defer();
+      var url = 'http://localhost:8680/lcmarket/shoppingKarts/current';
+        $http.get(url)
+      .then(function(response){
+        deferred.resolve(response.data);
+        return deferred.promise;
+      },  function (response) {
+        deferred.reject(response);
+        return deferred.promise;
+      });
+      return deferred.promise;
+    }    
   }
 })();
