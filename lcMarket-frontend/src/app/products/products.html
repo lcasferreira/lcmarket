@@ -9,18 +9,25 @@
 			<md-card-content class="md-card-content-custom-scroll">
 				<md-grid-list 
 					md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="4"
-			        md-row-height-gt-md="16:9" md-row-height="2:2"
+			        md-row-height-gt-md="1:1" md-row-height="4:3"
 			        md-gutter="12px" md-gutter-gt-sm="8px" >
 
 			        <md-grid-tile ng-repeat="prod in ctrl.products" style="background-color: lightblue;">
-			        	<div layout="row" layout-fill>
-			        		<img src="./assets/capas/{{prod.image}}" height="150px">
+			        	<md-card style="background-color: transparent !important;">
+			        		<md-card-header>
+			        			<md-card-avatar>
+			        				<img src="./assets/capas/{{prod.image}}" class="md-user-avatar">
+			        			</md-card-avatar>
+			        			<md-card-header-text>
+			        				<spam class="md-title">{{prod.name}}</spam>
+			        			</md-card-header-text>			        		
+			        		</md-card-header>
+			        		
+			        		<md-card-content>
+			        			{{prod.price}}
+			        		</md-card-content>
+			        	</md-card>
 			        	
-				        	<div layout="column">
-				        		<spam>{{prod.price}}</spam>
-				        		<spam>{{prod.name}}</spam>
-				        	</div>
-				        </div>
 				    	<md-grid-tile-footer layout-align="center center">
 				    		<md-button md-no-ink class="md-primary">
 				       			<ng-md-icon icon="add_shopping_cart" class="material-icons md-48"></ng-md-icon>
