@@ -19,16 +19,21 @@
     <!-- endinject -->
     <!-- endbuild -->
   </head>
-  <body layout="column">
+  <body layout="column" ng-controller="IndexController as indexCtrl">
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <md-toolbar>
         <div class="md-toolbar-tools" layout-align="end center">
-            <md-button class="md-fab md-mini" aria-label="Favorite">
+            <!--
+            <md-button class="md-fab md-mini" aria-label="Favorite" ng-click="indexCtrl.goShoppingCart">
                 <ng-md-icon icon="shopping_cart" class="material-icons md-48"></ng-md-icon>
             </md-button>
+            -->
+            <a ng-href="#/shopping_cart/">
+                <ng-md-icon icon="shopping_cart" class="material-icons md-48"></ng-md-icon>
+            </a>
         </div>
     </md-toolbar>
 
@@ -37,8 +42,8 @@
         <md-sidenav class="md-sidenav-left"
             md-component-id="left"
             md-is-locked-open="$mdMedia('gt-md')"
-            md-whiteframe="4">
-            Teste
+            md-whiteframe="4" layout-padding>
+            Espa&ccedil;o para Menu
         </md-sidenav>
 
         <div ng-view layout-fill></div>
