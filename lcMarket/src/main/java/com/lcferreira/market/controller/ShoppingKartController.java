@@ -1,16 +1,29 @@
 package com.lcferreira.market.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lcferreira.market.model.ShoppingCart;
+import com.lcferreira.market.service.ShoppingCartService;
+
 @RestController
 public class ShoppingKartController {
+	
+	@Autowired
+	private ShoppingCartService shoppingCartService;
 
-	@RequestMapping(value = "/shoppingKarts/{idShoppingKart}/{idProduct}", method = RequestMethod.PUT, produces = "application/json")
+	@RequestMapping(value = "/shoppingKarts/{idShoppingKart}/products/{idProduct}", method = RequestMethod.PUT, produces = "application/json")
 	public String addProduct( @PathVariable(name="idShoppingKart") Long idShoppingKart,
 							@PathVariable(name="idProduct") Long idProduct){
 		return "Product " + idProduct + " added to Kart " + idShoppingKart + "!";
+	}
+	
+	@RequestMapping(value = "/shoppingKarts/products/{idProduct}", method = RequestMethod.POST, produces = "application/json")
+	public ShoppingCart createShoppingCart( @PathVariable(name="idProduct") Long idProduct){
+		ShoppingCart newCart = shoppingCartService.createShoppingCart(idProduct);
+		return newCart;
 	}
 }
