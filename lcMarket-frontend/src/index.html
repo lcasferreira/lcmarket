@@ -31,7 +31,7 @@
                 <ng-md-icon icon="shopping_cart" class="material-icons md-48"></ng-md-icon>
             </md-button>
             -->
-            <a ng-href="#/shopping_cart/">
+            <a ng-href="#/shopping_cart/{{idCurrentCart}}">
                 <ng-md-icon icon="shopping_cart" class="material-icons md-48"></ng-md-icon>
             </a>
         </div>
@@ -48,8 +48,6 @@
 
         <div ng-view layout-fill></div>
     </div>
-    
-    
     
     <!-- build:js(src) scripts/vendor.js -->
     <!-- bower:js -->
