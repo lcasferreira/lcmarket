@@ -1,10 +1,11 @@
 <md-content layout="column" role="main">
 	<ui-view layout="column" layout-fill layout-padding>
-		
-
-	<div ng-show="ctrl.shoppingCart.items">
-		<md-card flex-gt-sm="90" flex-gt-md="80">
-			<md-card-content class="md-card-content-custom-scroll">					
+	<md-card flex-gt-sm="90" flex-gt-md="80">
+		<md-card-content layout="column" style="max-height:600px; overflow-y: auto;">
+			<div ng-show="!ctrl.shoppingCart.items">
+				N&atilde;o h&aacute; itens no carrinho de compras
+			</div>
+			<div ng-show="ctrl.shoppingCart.items">					
 				<table layout-fill>
 					<thead>
 						<tr layout="row">
@@ -40,16 +41,16 @@
 						</tr>
 					</tfoot>
 				</table>
-			</md-card-content>
-			<md-card-actions layout="row" layout-align="end center">
-	        	<md-button>
-	        		<a ng-href="#/">Voltar</a>
-	        	</md-button>
-	        </md-card-actions>
-		</md-card>
-	</div>
-	<div ng-show="!ctrl.shoppingCart.items">
-		Não há itens no carrinho de compras
-	</div>
+				</div>
+		</md-card-content>
+		<md-card-actions layout="row" layout-align="end center">
+			<a ng-href="#/" class="md-raised md-primary">
+        	<md-button class="md-raised md-primary">
+        		Voltar
+        	</md-button>
+        	</a>
+        </md-card-actions>
+	</md-card>
+	
 	</ui-view>
 </md-content>
